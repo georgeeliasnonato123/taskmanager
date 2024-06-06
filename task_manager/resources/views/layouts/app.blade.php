@@ -16,10 +16,9 @@
 <!-- arquivo css publico para gerenciar alterações de design -->
 <link rel="stylesheet" href="{{ asset('css/taskmanager.css') }}">
 
-
-<div class="bg-gray-800 text-white flex justify-between items-center py-4 px-8">
+<div class="bg-blue-500 text-white flex justify-between items-center py-4 px-8">
     <div class="flex items-center">
-        <img class="h-12 w-auto mr-4" src="https://via.placeholder.com/150" alt="Logo">
+        <img class="h-12 w-auto mr-4" src="{{ asset('images/logo.png') }}" alt="Logo">
         <span class="text-xl font-bold">Task Manager</span>
     </div>
     <div class="md:hidden">
@@ -33,21 +32,28 @@
     <nav class="hidden md:block">
         <ul class="flex space-x-4">
             <li>
-                <a href="#" class="hover:text-gray-200">Dashboard</a>
+                <a href="#" class="flex items-center hover:text-gray-200">
+                    <i class="fas fa-tasks mr-2"></i>
+                    Tarefas
+                </a>
             </li>
             <li>
-                <a href="#" class="hover:text-gray-200">Posts</a>
+                <a href="#" class="flex items-center hover:text-gray-200">
+                    <i class="fas fa-list-ul mr-2"></i>
+                    Categorias
+                </a>
             </li>
             <li>
-                <a href="#" class="hover:text-gray-200">Pages</a>
-            </li>
-            <li>
-                <a href="#" class="hover:text-gray-200">Users</a>
+                <a href="#" class="flex items-center hover:text-gray-200">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    Login
+                </a>
             </li>
         </ul>
     </nav>
 </div>
 
+<!-- para retornar as messages do app -->
 @if(session('success'))
 <div class="bg-green-500 text-white rounded-lg p-4 mb-4">
     {{ session('success') }}
@@ -61,5 +67,6 @@
     <button class="delete" onclick="closeNotification(this)"></button>
 </div>
 @endif
+
 <!-- java script -->
 <script src="{{ asset('js/taskmanager.js') }}"></script>

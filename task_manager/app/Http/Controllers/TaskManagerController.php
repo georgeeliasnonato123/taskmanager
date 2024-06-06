@@ -31,6 +31,20 @@ class TaskManagerController extends Controller
         return redirect()->back()->with('error', 'Erro ao criar categoria: ' . $e->getMessage());
     }
     }
+    public function updateCategories(Request $request, $id)
+{
+    try {
+        $category = Category::findOrFail($id);
+        $category->name = $request->input('editCategoryName');
+        $category->save();
+
+        return redirect()->back()->with('success', 'Categoria atualizada com sucesso.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Erro ao atualizar a categoria: ' . $e->getMessage());
+    }
+}
+
+
 
     public function storeTask(Request $request)
     {

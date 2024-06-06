@@ -68,4 +68,52 @@
         editModal.style.display = "none";
     }
     
+    $(document).ready(function(){
+        // Abrir modal ao clicar no botão
+        $('#openModalButton').click(function(){
+            $('#editCategoryModal').removeClass('hidden');
+        });
     
+        // Fechar modal ao clicar no botão Cancelar
+        $('#closeModalButton').click(function(){
+            $('#editCategoryModal').addClass('hidden');
+        });
+    
+        // Quando a seleção da categoria é alterada
+        $('#editCategorySelect').change(function(){
+            // Obtém o valor selecionado do select
+            var selectedCategoryId = $(this).val();
+            // Obtém o nome da categoria selecionada
+            var selectedCategoryName = $(this).find(':selected').data('name');
+            
+            // Atualiza o valor da input de texto com o nome da categoria selecionada
+            $('#editCategoryName').val(selectedCategoryName);
+        });
+    });
+    // js para jogar o id da categoria para o controller
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('editCategorySelect').addEventListener('change', function() {
+            var categoryId = this.value; 
+            var formAction = document.getElementById('updateCategoryForm').getAttribute('data-action'); // Obtém a URL base do atributo data-action
+            var updatedAction = formAction.replace(':id', categoryId); // Substitui o marcador de posição :id pelo ID selecionado
+            document.getElementById('updateCategoryForm').setAttribute('action', updatedAction); // Define a URL atualizada como a ação do formulário
+        });
+    });
+    //   codigo para pesquisa sincrona
+    $(document).ready(function () {
+        $('#pesquisa').on('keyup', function () {
+            var textoPesquisa = $(this).val().toLowerCase();
+            
+            $('tbody tr').each(function () {
+                var linha = $(this).text().toLowerCase();
+                
+                if (linha.indexOf(textoPesquisa) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+    
+        
