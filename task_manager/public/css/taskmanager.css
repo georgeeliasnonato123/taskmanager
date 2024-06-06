@@ -42,3 +42,9 @@
     right: 10px;
     cursor: pointer;
 }
+/* para ocultar o menu desktop em celulares */
+@media (max-width: 767px) {
+    #desktop-menu {
+        display: none;
+    }
+}

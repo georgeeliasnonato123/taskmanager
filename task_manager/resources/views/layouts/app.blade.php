@@ -1,19 +1,14 @@
-<!-- Tailwind CSS -->
+
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-<!-- Bootstrap CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Font Awesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
-<!-- arquivo css publico para gerenciar alterações de design -->
 <link rel="stylesheet" href="{{ asset('css/taskmanager.css') }}">
 
 <div class="bg-blue-500 text-white flex justify-between items-center py-4 px-8">
@@ -29,7 +24,7 @@
             </svg>
         </button>
     </div>
-    <nav class="hidden md:block">
+    <nav id="desktop-menu" class="hidden md:flex space-x-4">
         <ul class="flex space-x-4">
             <li>
                 <a href="#" class="flex items-center hover:text-gray-200">
@@ -53,7 +48,31 @@
     </nav>
 </div>
 
-<!-- para retornar as messages do app -->
+<!-- Menu para dispositivos móveis -->
+<nav id="mobile-menu" class="hidden md:hidden bg-blue-500">
+    <ul class="flex flex-col space-y-4 p-4">
+        <li>
+            <a href="#" class="flex items-center hover:text-gray-200">
+                <i class="fas fa-tasks mr-2"></i>
+                Tarefas
+            </a>
+        </li>
+        <li>
+            <a href="#" class="flex items-center hover:text-gray-200">
+                <i class="fas fa-list-ul mr-2"></i>
+                Categorias
+            </a>
+        </li>
+        <li>
+            <a href="#" class="flex items-center hover:text-gray-200">
+                <i class="fas fa-sign-in-alt mr-2"></i>
+                Login
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- para retornar as messages do controller do app -->
 @if(session('success'))
 <div class="bg-green-500 text-white rounded-lg p-4 mb-4">
     {{ session('success') }}
@@ -69,4 +88,5 @@
 @endif
 
 <!-- java script -->
+<script src="{{ asset('js/menu.js') }}"></script>
 <script src="{{ asset('js/taskmanager.js') }}"></script>

@@ -1,10 +1,16 @@
+    //função para mostrar o menu na tela mobile
+    $(document).ready(function() {
+        $('#mobile-menu-button').click(function() {
+            $('nav').toggleClass('hidden');
+        });
+    });
+    
     // mostrar form de vategorias
     document.getElementById('showNewCategoryField').addEventListener('click', function() {
         document.getElementById('newCategoryField').style.display = 'block';
     });
-
+    // Adiciona um listener para o clique no botão excluir task
     document.addEventListener('DOMContentLoaded', function() {
-        // Adiciona um listener para o clique no botão "Excluir"
         document.querySelectorAll('.btn-show-modal').forEach(function(button) {
             button.addEventListener('click', function(event) {
             
@@ -17,36 +23,15 @@
         });
     });
 
-    //função para fechar o modal
+    //função para fechar o modal de exclusão da task
     function closeModal(modalId) {
         var modal = document.getElementById(modalId);
         if (modal) {
             modal.style.display = "none";
         }
     }
-    // Função para fechar a notificação
-    function closeNotification(button) {
-        const notification = button.parentElement;
-        notification.style.display = 'none';
-    }
 
-    // Esconder a notificação após 5 segundos 
-    document.addEventListener('DOMContentLoaded', function() {
-        const notifications = document.querySelectorAll('.notification');
-        notifications.forEach(function(notification) {
-            setTimeout(function() {
-                notification.style.display = 'none';
-            }, 2500);
-        });
-    });
-    //função para mostrar o menu na tela mobile
-    document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('mobile-menu-button').addEventListener('click', function () {
-    document.querySelector('nav').classList.toggle('hidden');
-        });
-    });
-
-    //função do modal
+    //função do modal edit task
     document.querySelectorAll('.edit-task').forEach(button => {
         //joga o id para o modal para conseguir dá um update
         button.addEventListener('click', function() {
@@ -55,51 +40,56 @@
             editTaskForm.setAttribute('action', editTaskForm.getAttribute('action').replace('__TASK_ID__', taskId));
             document.getElementById('task_id').value = taskId;
     
-            // Exibir o modal
             const editModal = document.getElementById('editModal');
             editModal.classList.remove('hidden');
             editModal.style.display = 'block'; 
         });
     });
+    
 
-    //função para ocultar o modal se clicar no x
+    //função para ocultar o modal de editar se clicar no x
     function closeEditModal() {
         var editModal = document.getElementById('editModal');
         editModal.style.display = "none";
     }
-    
+    // função para o modal de edição de categoria
     $(document).ready(function(){
-        // Abrir modal ao clicar no botão
         $('#openModalButton').click(function(){
             $('#editCategoryModal').removeClass('hidden');
         });
     
-        // Fechar modal ao clicar no botão Cancelar
         $('#closeModalButton').click(function(){
             $('#editCategoryModal').addClass('hidden');
         });
-    
-        // Quando a seleção da categoria é alterada
+        // pega o valor do id da categoria 
         $('#editCategorySelect').change(function(){
-            // Obtém o valor selecionado do select
             var selectedCategoryId = $(this).val();
-            // Obtém o nome da categoria selecionada
             var selectedCategoryName = $(this).find(':selected').data('name');
             
             // Atualiza o valor da input de texto com o nome da categoria selecionada
             $('#editCategoryName').val(selectedCategoryName);
         });
     });
+
     // js para jogar o id da categoria para o controller
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('editCategorySelect').addEventListener('change', function() {
             var categoryId = this.value; 
-            var formAction = document.getElementById('updateCategoryForm').getAttribute('data-action'); // Obtém a URL base do atributo data-action
-            var updatedAction = formAction.replace(':id', categoryId); // Substitui o marcador de posição :id pelo ID selecionado
-            document.getElementById('updateCategoryForm').setAttribute('action', updatedAction); // Define a URL atualizada como a ação do formulário
+            var formAction = document.getElementById('updateCategoryForm').getAttribute('data-action'); 
+            var updatedAction = formAction.replace(':id', categoryId); 
+            document.getElementById('updateCategoryForm').setAttribute('action', updatedAction); 
         });
     });
-    //   codigo para pesquisa sincrona
+
+    // js para jogar o id da categoria para o controller na exclusão
+    document.getElementById('editCategorySelect').addEventListener('change', function() {
+        var categoryId = this.value; 
+        var formAction = document.getElementById('deleteCategoryForm').getAttribute('data-action'); 
+        var updatedAction = formAction.replace(':id', categoryId); 
+        document.getElementById('deleteCategoryForm').setAttribute('action', updatedAction); 
+    });
+
+    //   js para pesquisa sincrona do search
     $(document).ready(function () {
         $('#pesquisa').on('keyup', function () {
             var textoPesquisa = $(this).val().toLowerCase();
