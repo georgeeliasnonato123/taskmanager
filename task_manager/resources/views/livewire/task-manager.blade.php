@@ -50,7 +50,6 @@
         </div>
     </div>
 
-
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <table class="table-auto w-full">
             <thead>
@@ -68,7 +67,7 @@
                         <td class="border px-4 py-2">{{ $task->description }}</td>
                         <td class="border px-4 py-2">{{ $task->category->name }}</td>
                         <td class="border px-4 py-2">
-                            <button wire:click="editTask({{ $task->id }})" class="btn btn-sm btn-primary mr-2"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="btn btn-sm btn-primary mr-2 edit-task" data-taskid="{{ $task->id }}"><i class="fas fa-edit"></i> Editar</button>
                             <button class="btn btn-sm btn-danger btn-show-modal" data-target="modal{{$task->id}}"><i class="fas fa-trash"></i> Excluir</button>
                             <!-- Modal de confirmação de exclusão -->
                             <div class="modal-wrapper hidden" id="modal{{$task->id}}" style="display:none">
@@ -81,9 +80,43 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Confirmar</button>
                                     </form>
-                                    <label class="modal-close" for="modal-toggle{{$task->id}}">&#10006;</label>
+                                    <label class="modal-close" for="modal-toggle{{$task->id}}" onclick="closeModal('modal{{$task->id}}')">&#10006;</label>
+
                                 </div>
                             </div>
+                                <!-- Pop-up invisível com display none -->
+                                <div class="modal-wrapper hidden" id="editModal" style="display:none">
+                                    <div class="modal-box">
+                                        <span class="modal-close" onclick="closeEditModal()">&#10006;</span>
+                                        <p>Editando Tarefa ID: <span id="taskId"></span></p>
+                                        <!-- Campos editáveis da tarefa -->
+                                        <form id="editTaskForm" action="{{ route('update.task', ['task' => '__TASK_ID__']) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="task_id" id="task_id">
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="editTitle">Título da Tarefa:</label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="editTitle" id="editTitle" type="text" placeholder="Título da Tarefa" value="{{ $task->title }}">
+                                                @error('editTitle') <span class="text-red-500">{{ $message }}</span> @enderror
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="editDescription">Descrição:</label>
+                                                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="editDescription" id="editDescription" placeholder="Descrição">{{ $task->description }}</textarea>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="editCategory">Categoria:</label>
+                                                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="editCategory" id="editCategory">
+                                                    <option value="" disabled selected>Selecione uma categoria</option>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}" {{ $task->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('editCategory') <span class="text-red-500">{{ $message }}</span> @enderror
+                                            </div>
+                                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Salvar Alterações</button>
+                                        </form>
+                                    </div>
+                                </div>
                         </td>
                     </tr>
                 @endforeach
