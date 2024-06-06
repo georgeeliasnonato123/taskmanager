@@ -6,9 +6,8 @@ Este é um sistema de gerenciamento de tarefas construído em Laravel.
 
 - PHP 8.3 ou superior (recomendado PHP 8.3.7)
 - Composer
-- Node.js
 - npm 8.5.1
-- Node 12.22.9
+- Node.js 12.22.9
 - SQLite
 
 ## Instalação
