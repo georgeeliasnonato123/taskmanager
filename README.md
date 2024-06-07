@@ -28,9 +28,9 @@ Certifique-se de que todas as dependências estão instaladas corretamente e que
 
 ## Comandos Adicionais que talvez pode precisar
 
-para instalar o SQLite no projeto `sudo apt-get install php-sqlite3` 
-para instalar o pacote xml no php.ini `sudo apt-get install php-xml` 
-para instalar o pacote dom no php.ini `sudo apt-get install php-dom` 
+- para instalar o SQLite no projeto `sudo apt-get install php-sqlite3` 
+- para instalar o pacote xml no php.ini `sudo apt-get install php-xml` 
+- para instalar o pacote dom no php.ini `sudo apt-get install php-dom` 
 
 ## Contribuindo
 
