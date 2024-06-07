@@ -26,6 +26,12 @@ Passo a passo para instalação
 
 Certifique-se de que todas as dependências estão instaladas corretamente e que você esteja usando a versão correta do PHP antes de executar os comandos mencionados acima.
 
+## Comandos Adicionais que talvez pode precisar
+
+`sudo apt-get install php-sqlite3` para instalar o SQLite no projeto
+`sudo apt-get install php-xml` para instalar o pacote xml no php.ini
+`sudo apt-get install php-dom` para instalar o pacote dom no php.ini
+
 ## Contribuindo
 
 Sinta-se à vontade para contribuir para este projeto. Basta abrir uma issue ou enviar uma pull request.
