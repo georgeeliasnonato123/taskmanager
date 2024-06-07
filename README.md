@@ -12,7 +12,7 @@ Este é um sistema de gerenciamento de tarefas construído em Laravel.
 
 ## Instalação
 
-Disponibilizei o .env.examples e o vendor.examples para auxilio.
+## Disponibilizei o .env.examples e o vendor.examples para auxilio, caso o comando composer install não saia como o esperado.
 
 Passo a passo para instalação
 
